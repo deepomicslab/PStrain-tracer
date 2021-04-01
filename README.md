@@ -9,7 +9,7 @@ PStrain-tracer was written in python3 and perl5, and using R code to do the visu
   git clone https://github.com/deepomicslab/PStrain-tracer.git
 ```
 * Python Dependencies
-
+** numpy
 * Configuration
 
 ## Commands
