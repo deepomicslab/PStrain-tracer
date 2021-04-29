@@ -1,0 +1,104 @@
+//
+sample: FMT30
+fq1: FMT30_1.fastq.gz
+fq2: FMT30_2.fastq.gz
+//
+sample: FMT103
+fq1: FMT103_1.fastq.gz
+fq2: FMT103_2.fastq.gz
+//
+sample: FMT109
+fq1: FMT109_1.fastq.gz
+fq2: FMT109_2.fastq.gz
+//
+sample: FMT34
+fq1: FMT34_1.fastq.gz
+fq2: FMT34_2.fastq.gz
+//
+sample: FMT101
+fq1: FMT101_1.fastq.gz
+fq2: FMT101_2.fastq.gz
+//
+sample: FMT102
+fq1: FMT102_1.fastq.gz
+fq2: FMT102_2.fastq.gz
+//
+sample: FMT110
+fq1: FMT110_1.fastq.gz
+fq2: FMT110_2.fastq.gz
+//
+sample: FMT33
+fq1: FMT33_1.fastq.gz
+fq2: FMT33_2.fastq.gz
+//
+sample: FMT96
+fq1: FMT96_1.fastq.gz
+fq2: FMT96_2.fastq.gz
+//
+sample: FMT97
+fq1: FMT97_1.fastq.gz
+fq2: FMT97_2.fastq.gz
+//
+sample: FMT98
+fq1: FMT98_1.fastq.gz
+fq2: FMT98_2.fastq.gz
+//
+sample: FMT106
+fq1: FMT106_1.fastq.gz
+fq2: FMT106_2.fastq.gz
+//
+sample: FMT2
+fq1: FMT2_1.fastq.gz
+fq2: FMT2_2.fastq.gz
+//
+sample: FMT51
+fq1: FMT51_1.fastq.gz
+fq2: FMT51_2.fastq.gz
+//
+sample: FMT53
+fq1: FMT53_1.fastq.gz
+fq2: FMT53_2.fastq.gz
+//
+sample: FMT1
+fq1: FMT1_1.fastq.gz
+fq2: FMT1_2.fastq.gz
+//
+sample: FMT5
+fq1: FMT5_1.fastq.gz
+fq2: FMT5_2.fastq.gz
+//
+sample: FMT6
+fq1: FMT6_1.fastq.gz
+fq2: FMT6_2.fastq.gz
+//
+sample: FMT39
+fq1: FMT39_1.fastq.gz
+fq2: FMT39_2.fastq.gz
+//
+sample: FMT41
+fq1: FMT41_1.fastq.gz
+fq2: FMT41_2.fastq.gz
+//
+sample: FMT27
+fq1: FMT27_1.fastq.gz
+fq2: FMT27_2.fastq.gz
+//
+sample: FMT75
+fq1: FMT75_1.fastq.gz
+fq2: FMT75_2.fastq.gz
+//
+sample: FMT77
+fq1: FMT77_1.fastq.gz
+fq2: FMT77_2.fastq.gz
+//
+sample: FMT4
+fq1: FMT4_1.fastq.gz
+fq2: FMT4_2.fastq.gz
+//
+sample: FMT66
+fq1: FMT66_1.fastq.gz
+fq2: FMT66_2.fastq.gz
+//
+sample: FMT67
+fq1: FMT67_1.fastq.gz
+fq2: FMT67_2.fastq.gz
