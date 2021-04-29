@@ -1,2 +1,0 @@
-# Gene	Locus	Ref	Alt	str-1
-GeneID:16385374	183	G	A	1

@@ -1,1 +1,0 @@
-# Gene	Locus	Ref	Alt	No_Valid_SNV
