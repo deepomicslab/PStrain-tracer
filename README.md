@@ -46,16 +46,80 @@ python ../src/PT-01-cluster.py -c config -o demo_PStrain_result --similarity 0.9
 
 # Create the output folder
 mkdir output
-
+# Strain engraftment pattern and visualization
 perl ../src/PT-02-FMT_visual.pl  -WDR output -LS experimets_list.tsv -PS demo_PStrain_result/ -S 0.9
 
+# Engrafment summary and visualization, default is run with proportion, with '-m abd' will run with original input abundance
 perl ../src/PT-03-engraft.pl -WDR output -LS experimets_list.tsv -PS demo_PStrain_result/ -S 0.9
 perl ../src/PT-03-engraft.pl -WDR output -LS experimets_list.tsv -PS demo_PStrain_result/ -S 0.9 -m abd
 
+# Number of strains and heterozygous SNVs statistic
 perl ../src/PT-04-heterzygousSNV_strainN.pl -WDR output -PS demo_PStrain_result/ -S 0.9
+
+# Detect potential determinant strains with wilcox testing
 perl ../src/PT-05-wilcox_testing.pl -WDR output -PS demo_PStrain_result/ -S 0.9 -LS group_info.tsv
+
+# Reporting the most similar genome of the provided strains
 perl ../src/PT-06-detect.pl -WDR output -PS demo_PStrain_result/ -S 0.9 -LS strain.txt
 ```
 
-## Output
+## Input
+- config files, the format you can find at [**PStrain**](https://github.com/wshuai294/PStrain)
+- experiments list, a line contrains all samples involved in one FMT experiment follow a sequence of \[donor\] \[recipient\] \[preFMT1\] \[preFMT2\] ... (separated by tab). An example you could find at ```example/experimets_list.tsv```
+```
+FMT30	FMT103	FMT109
+FMT34	FMT101	FMT102	FMT110
+FMT33	FMT96	FMT97	FMT98	FMT106
+FMT2	FMT51	FMT53
+FMT1	FMT5	FMT6	FMT39	FMT41
+FMT27	FMT75	FMT77
+FMT4	FMT66	FMT67
+```
+- group info, contrains all samples you want to compare in two groups, one line per sample with sample name and group name, the hander line is needed. An example you could find at ```example/group_info.tsv```
+```
+sampleID	groupname
+FMT1	Success
+FMT2	Failure
+FMT27	Failure
+FMT30	Success
+FMT33	Success
+FMT34	Success
+FMT4	Failure
+```
+- strains list, the strains you interested in with the format you run after the step1. An example you could find at ```example/strain.txt```
+```
+Ruminococcus_lactaris_clu-1
+Eubacterium_rectale_clu-4
+```
 
+## Output
+- PT-01  
+A new folder name ```merge_[similarity_cutoff]``` will created in the PStrain output folder. Contains ```strain_number.txt``` and ```seq/```. The folder ```seq/``` had sequence and abundance of each strains after clustering.
+- PT-02  
+A new folder name ```outdir/FMT_visual/``` will created. For each experimet, it had four files: 
+  - ```*.xls``` Strain abundace of all samples in this FMT experiment
+  - ```*.rela.vis.txt``` Visualization input with strain engraftment pattern annotation of each strain
+  - ```*.rela.R``` Visualization script in R format
+  - ```*.rela.pdf``` Visualization result in stacked barplot
+- PT-03  
+A new folder ```outdir/engraft/``` will created. For each experimet, it had three files: 
+  - ```*.[propotion/relative].tsv``` Visualization input
+  - ```*.[propotion/relative].R``` Visualization script in R format 
+  - ```*.[propotion/relative].pdf``` Visualization result in compared boxplot
+- PT-04  
+A new folder ```outdir/strainN``` will created.
+  - ```strainN_heterSNV_stat.*.tsv``` The number of strains number and the corresponding heterozygous SNVs in each species of every samples
+- PT-05  
+A new folder ```outdir/wilcox_testing/``` will created. For each comparison, the result had nine files:
+  - ```*.tsv``` Modified abundance input for strain and species level
+  - ```*.group_info``` A copy of group info input for further check
+  - ```*.R``` Wilcox-tesing R script
+  - ```*.test.tsv``` Wilcox-testing result for strain and species level
+  - ```*heatmap*``` Visualization files
+- PT-06  
+A new folder ```outdir/find_strain``` will created. Foreach strain, a new folder ```outdir/find_strain/[strain_name]``` will created.  
+After you run the PT-06 module, you can find three shell in ```outdir/find_strain/[strain_name]```, you need to run them in order.  
+The separated shell scripts are made in order to avoid the error in downloading files or calling SNP. Finally, you could find result:
+  - ```dl/``` Contains downloaded genome fastas in the same species of your interested strain.
+  - ```snp/``` Contains snps calling result of genomes
+  - ```tree.nwk``` The phylogenetic tree of interested strains and all strains in the sample species in newick format for further visualization or check.
