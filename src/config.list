@@ -1,0 +1,8 @@
+Rscript=/where/R/installed/bin/Rscript
+R_lib=/where/R/library
+
+MUMmer=/where/MUMmer/install/MUMmer3.23/
+fasttree=/where/excutable/FastTree
+ass_sum=/where/PStrain-tracer/src/assembly_summary_refseq_20200423.txt
+species_marker=/where/PStrain/db/species_markers.txt.gz
+marker_gene=/where/PStrain/db/marker_gene.fna.gz

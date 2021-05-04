@@ -244,11 +244,11 @@ sub para_alert{
 
 	die "
 	USAGE:
-	perl $RealScript [<Options>] -WDR <whole_work_dir> -SL <sample_list> -SH <shell_file>
+	perl $RealScript [<Options>] -WDR <whole_work_dir> -LS <experiment_list> -PS <PStrain_dir> -S <similarity_cutoff>
 
 	OPTIONS:
 	-WDR  [s]  the whole work dir. <required>
-	-LS   [s]  the sample-list. <required>
+	-LS   [s]  the sample-list of each FMT experiment in one line, separated by tab. <required>
 	-PS   [s]  PStrain result direction. <required>
 	-S    [s]  similarity cutoff. <required>
 	-h         show this help.
