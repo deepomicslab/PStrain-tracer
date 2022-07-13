@@ -123,3 +123,7 @@ The separated shell scripts are made in order to avoid the error in downloading 
   - ```dl/``` Contains downloaded genome fastas in the same species of your interested strain.
   - ```snp/``` Contains snps calling result of genomes
   - ```tree.nwk``` The phylogenetic tree of interested strains and all strains in the sample species in newick format for further visualization or check.
+  
+  
+  ## Citation
+  Jiang, Yiqi, et al. "A framework to trace microbial engraftment at the strain level during fecal microbiota transplantation." bioRxiv (2022).
