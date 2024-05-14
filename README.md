@@ -125,6 +125,24 @@ The separated shell scripts are made in order to avoid the error in downloading 
   - ```tree.nwk``` The phylogenetic tree of interested strains and all strains in the sample species in newick format for further visualization or check.
 
 ## Update for MetaPhlAn3 and MetaPhlAn4
+### Minium requirements for this step
+- Packages
+```
+Python Bio
+Fasttree
+MUMmer
+```
+- [GTDB bacteria metadata **v207**](https://data.gtdb.ecogenomic.org/releases/release207/207.0/bac120_metadata_r207.tar.gz)
+```
+wget https://data.gtdb.ecogenomic.org/releases/release207/207.0/bac120_metadata_r207.tar.gz
+tar -zxvf bac120_metadata_r207.tar.gz
+mv src/
+```
+Download and uncompressed, move to ```src/```
+
+You should use **v207** as the same version MetaPhlAn used in [SGB2GTDB](https://raw.githubusercontent.com/biobakery/MetaPhlAn/master/metaphlan/utils/mpa_vOct22_CHOCOPhlAnSGB_202212_SGB2GTDB.tsv).
+
+
 ### Reporting the most similar genome of the provided strains
 ```
 #For MetaPhlAn3
@@ -135,6 +153,7 @@ perl ../src/PT-07-detect.v2.pl -WDR test_M4 -S s__Escherichia_coli -V M4 -I s__E
 Then will generate shell scripts in ```test_M*/find_strain/s__Escherichia_coli```. Run shell scripts step by step for downloading genomes, detecting SNPs and constructing tree to find the closest genomes for each strain.
 ### Inputs
 - ```-I``` PStrain output of strain sequence e.g. result/seq/s__Escherichia_coli_seq.txt. 
+
 Example:
 ```
 # Gene  Locus   Ref     Alt     str-1   str-2   str-3
@@ -149,12 +168,26 @@ Example:
 562__P64549__K758_00320 246     T       C       1       1       1
 ```
 - ```-DBS``` Species markers file of MetaPhlAn database. Generated using [translate_pkl.py](https://github.com/wshuai294/PStrain/blob/master/scripts/translate_pkl.py) from .pkl file in MetaPhlAn database.
+
 Example: ```python translate_pkl.py mpa_vOct22_CHOCOPhlAnSGB_202403.pkl mpa_vOct22_CHOCOPhlAnSGB_202403.species_markers.txt```
-- ```-DBM``` Marker genes fasta file from MetaPhlAn database. Download and uncompressed from [MetaPhlAn](http://cmprod1.cibio.unitn.it/biobakery3/metaphlan_databases/). Files in .bz2 or .fna or .gz are acceptable.
+
+- ```-DBM``` Marker genes fasta file from MetaPhlAn database.
+Download and uncompressed from [MetaPhlAn](http://cmprod1.cibio.unitn.it/biobakery3/metaphlan_databases/). Files in .bz2 or .fna or .gz are acceptable.
 
 ### Outputs
 - tree.nwk A tree of selected genomes and input strain in newick format.
 - *sorted_distance.txt For each strain, have an output with genomes in incremental distance.
+
+Example:
+```
+s__Escherichia_coli_str-1       0.0
+GCF_003303795.1_ASM330379v1     0.268918215
+GCF_002459435.1_ASM245943v1     0.273527672
+GCF_015316785.1_ASM1531678v1    0.273704976
+GCF_005395845.1_ASM539584v1     0.27497622299999996
+GCF_003334035.1_ASM333403v1     0.27671494
+```
+
   
 ## Citation
 Jiang, Yiqi, et al. "A framework to trace microbial engraftment at the strain level during fecal microbiota transplantation." bioRxiv (2022).
