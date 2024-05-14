@@ -42,23 +42,9 @@ print "Working directory: $tmp_dir\n";
 &para_alert;
 
 
-#my $spe = 's__Escherichia_coli';
-#my $metaphlan_v = 'M4';
-#my $threshold = 50;
-#my $seq_in = '/mnt/d/pstrain-test/out_m4/test/result/seq/s__Escherichia_coli_seq.txt';
-
-
-#$DB{'species_marker'} = 'mpa_v31_CHOCOPhlAn_201901.species_markers.txt.gz';
-#$DB{'species_marker'} = 'mpa_vOct22_CHOCOPhlAnSGB_202403.species_markers.txt.gz';
-#$DB{'marker_gene'} = 'mpa_v31_CHOCOPhlAn_201901.fna.bz2';
-#$DB{'marker_gene'} = 'mpa_vOct22_CHOCOPhlAnSGB_202403.fna.bz2';
-
-
-
 `zcat $DB{'species_marker'}|grep -w $spe > $tmp_dir/$spe.list`;
 open IN,"$tmp_dir/$spe.list";
 
-#print "$tmp_dir/$spe.list\n";
 my %in = ();
 while(<IN>){
     chomp;
@@ -82,11 +68,9 @@ $/ = '>';
 
 <$in>;
 while(my $seq=<$in>){
-    #print "$seq\n\n";
+
     $seq =~ s/>$//;
-    
     my $id = (split /\s/,$seq)[0];
-    #print "$id\n";
     if(exists $in{$id}){
         print OU ">$seq";
     }
@@ -98,8 +82,6 @@ open SH1,">$tmp_dir/1.dl.sh";
 
 open SH2,">$tmp_dir/2.snp.sh";
 `mkdir -p $tmp_dir/snp/`;
-
-#$DB{'gtdb'} = 'bac120_metadata_r207.tsv';
 
 my %search_id =();
 $search_id{'M3'} = 'ncbi_taxid';
@@ -129,7 +111,6 @@ for(my $i=0;$i<@head;$i++){
     $column{$head[$i]} = $i;
 }
 
-
 my @ass_list = ();
 while(<DB>){
     chomp;
@@ -141,8 +122,6 @@ while(<DB>){
 
 my $count = $#ass_list + 1;
 print "Total genomes of $spe: $count\n";
-#my $ass_list = `cat $DB{'ass_sum'}|grep $spe_info[0]|grep $spe_info[1]`;
-#my @ass_list = split /\n/,$ass_list;
 
 my %select = ();
 if($count < $threshold){
@@ -164,17 +143,13 @@ if($count < $threshold){
 
 foreach my $i(keys %select){
     my $ass_info = $ass_list[$i];
-    #print "$ass_info\n";
     my @ass_info = split /\t/,$ass_info;
     my ($id,$name) = ($ass_info[$column{'accession'}],$ass_info[$column{'ncbi_assembly_name'}]);
     my ($s1,$s2,$s3,$s4,$s5) = $id =~ /^.._((\w*)_(\d\d\d)(\d\d\d)(\d\d\d)\.\d)/;
-    #print "($s1,$s2,$s3,$s4,$5)\n";
     my $link = "https://ftp.ncbi.nlm.nih.gov/genomes/all/$s2/$s3/$s4/$s5/$s1\_$name/$s1\_$name\_genomic.fna.gz";
     $link =~ s/ /_/g;
-    #print "$link\n";
     print SH1 "wget -c -P $tmp_dir/dl/ $link\n";
 }
-#$DB{'MUMmer'} = '/home/jiangyiqi/miniconda3/envs/syri_env/bin/';
 print SH1 "gunzip $tmp_dir/dl/*gz\n";
 print SH2 "for i in `ls $tmp_dir/dl/|grep fna|sed -e 's/_genomic.fna//'`;\ndo\n\tnucmer --mum -p $tmp_dir/snp/\$i $tmp_dir/$spe.marker.fa $tmp_dir/dl/\$i\\_genomic.fna;\n\tdelta-filter -1 $tmp_dir/snp/\$i.delta > $tmp_dir/snp/\$i.delta.2;\n\tshow-snps -CIrT $tmp_dir/snp/\$i.delta.2 > $tmp_dir/snp/\$i.snp;\ndone\n";
 
@@ -201,7 +176,6 @@ sub para_alert{
 	}
 	elsif(!$tmp_dir || !-d $tmp_dir){
         `mkdir -p $tmp_dir`;    
-		#$alert = 1;
 	}else{
         print "Warning: working directory $tmp_dir exists.\n"
     }
