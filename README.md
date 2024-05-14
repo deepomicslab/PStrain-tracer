@@ -173,7 +173,9 @@ Example: ```python translate_pkl.py mpa_vOct22_CHOCOPhlAnSGB_202403.pkl mpa_vOct
 
 - ```-DBM``` Marker genes fasta file from MetaPhlAn database.
 Download and uncompressed from [MetaPhlAn](http://cmprod1.cibio.unitn.it/biobakery3/metaphlan_databases/). Files in .bz2 or .fna or .gz are acceptable.
+- [option] ```-N``` The threshold N of genome number. When the genomes in the corresponding species > N, we will randomly select N genomes to construct tree.
 
+ 
 ### Outputs
 - tree.nwk A tree of selected genomes and input strain in newick format.
 - *sorted_distance.txt For each strain, have an output with genomes in incremental distance.
