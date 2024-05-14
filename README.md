@@ -123,7 +123,38 @@ The separated shell scripts are made in order to avoid the error in downloading 
   - ```dl/``` Contains downloaded genome fastas in the same species of your interested strain.
   - ```snp/``` Contains snps calling result of genomes
   - ```tree.nwk``` The phylogenetic tree of interested strains and all strains in the sample species in newick format for further visualization or check.
+
+## Update for MetaPhlAn3 and MetaPhlAn4
+### Reporting the most similar genome of the provided strains
+```
+#For MetaPhlAn3
+perl ../src/PT-07-detect.v2.pl -WDR test_M3 -S s__Escherichia_coli -V M3 -I s__Escherichia_coli_seq.txt -N 50 -DBS mpa_v31_CHOCOPhlAn_201901.species_markers.txt.gz -DBM mpa_v31_CHOCOPhlAn_201901.fna.bz2
+#For MetaPhlAn4
+perl ../src/PT-07-detect.v2.pl -WDR test_M4 -S s__Escherichia_coli -V M4 -I s__Escherichia_coli_seq.txt -N 20 -DBS mpa_vOct22_CHOCOPhlAnSGB_202403.species_markers.txt.gz -DBM mpa_vOct22_CHOCOPhlAnSGB_202403.fna
+```
+Then will generate shell scripts in ```test_M*/find_strain/s__Escherichia_coli```. Run shell scripts step by step for downloading genomes, detecting SNPs and constructing tree to find the closest genomes for each strain.
+### Inputs
+- ```-I``` PStrain output of strain sequence e.g. result/seq/s__Escherichia_coli_seq.txt. 
+Example:
+```
+# Gene  Locus   Ref     Alt     str-1   str-2   str-3
+562__P64549__K758_00320 30      G       T       0       1       1
+562__P64549__K758_00320 72      A       G       1       1       1
+562__P64549__K758_00320 140     G       C       1       1       1
+562__P64549__K758_00320 196     T       C       1       1       1
+562__P64549__K758_00320 204     A       G       1       1       1
+562__P64549__K758_00320 210     T       C       1       1       1
+562__P64549__K758_00320 213     C       G       1       1       1
+562__P64549__K758_00320 222     A       G       1       1       1
+562__P64549__K758_00320 246     T       C       1       1       1
+```
+- ```-DBS``` Species markers file of MetaPhlAn database. Generated using [translate_pkl.py](https://github.com/wshuai294/PStrain/blob/master/scripts/translate_pkl.py) from .pkl file in MetaPhlAn database.
+Example: ```python translate_pkl.py mpa_vOct22_CHOCOPhlAnSGB_202403.pkl mpa_vOct22_CHOCOPhlAnSGB_202403.species_markers.txt```
+- ```-DBM``` Marker genes fasta file from MetaPhlAn database. Download and uncompressed from [MetaPhlAn](http://cmprod1.cibio.unitn.it/biobakery3/metaphlan_databases/). Files in .bz2 or .fna or .gz are acceptable.
+
+### Outputs
+- tree.nwk A tree of selected genomes and input strain in newick format.
+- *sorted_distance.txt For each strain, have an output with genomes in incremental distance.
   
-  
-  ## Citation
-  Jiang, Yiqi, et al. "A framework to trace microbial engraftment at the strain level during fecal microbiota transplantation." bioRxiv (2022).
+## Citation
+Jiang, Yiqi, et al. "A framework to trace microbial engraftment at the strain level during fecal microbiota transplantation." bioRxiv (2022).
