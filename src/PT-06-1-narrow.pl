@@ -32,7 +32,8 @@ foreach my $file(@file){
 	while(<IN>){
 		chomp;
 		my @l = split /\t/;
-		if(!exists $in{"$l[8]_$l[0]"}){next}
+		#if(!exists $in{"$l[8]_$l[0]"}){next}
+		$in{"$l[8]_$l[0]"} = 1;
 		if(length($l[2])>1){next}
 		$all{$id}{"$l[8]_$l[0]"} = $l[2];
 	}
