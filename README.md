@@ -143,14 +143,18 @@ Download and uncompressed, move to ```src/```
 You should use **v207** as the same version MetaPhlAn used in [SGB2GTDB](https://raw.githubusercontent.com/biobakery/MetaPhlAn/master/metaphlan/utils/mpa_vOct22_CHOCOPhlAnSGB_202212_SGB2GTDB.tsv).
 
 
-### Reporting the most similar genome of the provided strains
+### Reporting the most similar genome of the provided strains 
+- Generate shell
 ```
 #For MetaPhlAn3
 perl ../src/PT-07-detect.v2.pl -WDR test_M3 -S s__Escherichia_coli -V M3 -I s__Escherichia_coli_seq.txt -N 50 -DBS mpa_v31_CHOCOPhlAn_201901.species_markers.txt.gz -DBM mpa_v31_CHOCOPhlAn_201901.fna.bz2
 #For MetaPhlAn4
 perl ../src/PT-07-detect.v2.pl -WDR test_M4 -S s__Escherichia_coli -V M4 -I s__Escherichia_coli_seq.txt -N 20 -DBS mpa_vOct22_CHOCOPhlAnSGB_202403.species_markers.txt.gz -DBM mpa_vOct22_CHOCOPhlAnSGB_202403.fna
 ```
-Then will generate shell scripts in ```test_M*/find_strain/s__Escherichia_coli```. Run shell scripts step by step for downloading genomes, detecting SNPs and constructing tree to find the closest genomes for each strain.
+Then will generate shell scripts in ```test_M*/find_strain/s__Escherichia_coli```. 
+
+- Run shell scripts step by step for downloading genomes, detecting SNPs and constructing tree to find the closest genomes for each strain.
+
 ### Inputs
 - ```-I``` PStrain output of strain sequence e.g. result/seq/s__Escherichia_coli_seq.txt. 
 
